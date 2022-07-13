@@ -1,77 +1,69 @@
 @extends('layouts.app')
 
+@section('navbar')
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+                    <i class="icon-reorder shaded"></i>
+                </a>
+                <a class="brand" href="{{ route('landing') }}">
+                    Landing
+                </a>
+                <div class="nav-collapse collapse navbar-inverse-collapse">
+                    <ul class="nav pull-right">
+                        <li><a href="{{ route('login') }}">
+                            Login
+                        </a></li>
+                    </ul>
+                </div><!-- /.nav-collapse -->
+            </div>
+        </div><!-- /navbar-inner -->
+    </div><!-- /navbar -->
+@endsection
+
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+    <div class="container">
+        <div class="row">
+            <div class="module module-login span4 offset4">
+                @if (session()->has('error'))
+                    <div class="alert alert-danger" role="alert">
+                        <div class="text-red-400 fw-bold fs-4">{{ session('error') }}</div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+                <form class="form-vertical" action="{{ route('register') }}" method="POST">
+                    @csrf
+                    <div class="module-head">
+                        <h3>Register</h3>
+                    </div>
+                    <div class="module-body">
+                        <div class="control-group">
+                            <div class="controls row-fluid">
+                                <input class="span12 @error('name') is-invalid @enderror" type="text" name="name" placeholder="Nama" value="{{ old('name') }}">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls row-fluid">
+                                <input class="span12 @error('email') is-invalid @enderror" type="text" name="email" placeholder="Email" value="{{ old('email') }}">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls row-fluid">
+                                <input class="span12 @error('password') is-invalid @enderror" type="password" name="password" placeholder="Password" value="{{ old('password') }}">
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                    </div>
+                    <div class="module-foot">
+                        <div class="control-group">
+                            <div class="controls clearfix">
+                                <button type="submit" class="btn btn-primary pull-right">Register</button>
                             </div>
                         </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</div>
 @endsection
