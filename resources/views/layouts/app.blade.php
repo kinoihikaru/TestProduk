@@ -6,6 +6,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
    @include('layouts.partials.link')
+   @yield('link')
 </head>
 <body>
 

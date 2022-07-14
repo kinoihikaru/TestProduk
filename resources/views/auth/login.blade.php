@@ -27,10 +27,10 @@
         <div class="row">
             <div class="module module-login span4 offset4">
                 @if (session()->has('error'))
-                    <div class="alert alert-danger" role="alert">
-                        <div class="text-red-400 fw-bold fs-4">{{ session('error') }}</div>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    {{ session('error') }}
+                </div>
                 @endif
                 <form class="form-vertical" action="{{ route('login') }}" method="POST">
                     @csrf
@@ -41,11 +41,17 @@
                         <div class="control-group">
                             <div class="controls row-fluid">
                                 <input class="span12 @error('email') is-invalid @enderror" type="text" name="email" placeholder="Email" value="{{ old('email') }}">
+                                @error('email')
+                                    <span class="help-inline" style="color: red">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="control-group">
                             <div class="controls row-fluid">
                                 <input class="span12 @error('password') is-invalid @enderror" type="password" name="password" placeholder="Password" value="{{ old('password') }}">
+                                @error('password')
+                                    <span class="help-inline" style="color: red">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>

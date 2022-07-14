@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Landing\LandingController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ApiGoogleTranslate\ApiLanguagesController;
+use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Produk\ProdukController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +24,9 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['auth'])->group(function (){
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::resource('/translate-api', ApiLanguagesController::class);
+    Route::resource('user', UserController::class);
+    Route::resource('produk', ProdukController::class);
+});

@@ -41,16 +41,25 @@
                         <div class="control-group">
                             <div class="controls row-fluid">
                                 <input class="span12 @error('name') is-invalid @enderror" type="text" name="name" placeholder="Nama" value="{{ old('name') }}">
+                                @error('name')
+                                    <span class="help-inline" style="color: red">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="control-group">
                             <div class="controls row-fluid">
                                 <input class="span12 @error('email') is-invalid @enderror" type="text" name="email" placeholder="Email" value="{{ old('email') }}">
+                                @error('email')
+                                    <span class="help-inline" style="color: red">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="control-group">
                             <div class="controls row-fluid">
-                                <input class="span12 @error('password') is-invalid @enderror" type="password" name="password" placeholder="Password" value="{{ old('password') }}">
+                                <input class="span12 @error('password') is-invalid @enderror" type="password" name="password" placeholder="Password">
+                                @error('password')
+                                    <span class="help-inline" style="color: red">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
 
