@@ -53,7 +53,7 @@
                         <hr class="divider" />
                     </div>
                     <div class="col-lg-8 align-self-baseline">
-                        <p class="text-white-75 mb-5">Website sederhana ini hanya berisi CRUD user dan produk, website ini juga menampilkan API Language Google Translate terbatas</p>
+                        <p class="text-white-75 mb-5">Website sederhana ini hanya berisi CRUD user dan produk, website ini juga menampilkan API Language Google Translate terbatas. Proses melakukan request API dapat dilihat di LandingController</p>
                         <a class="btn btn-primary btn-xl" href="{{ route('home') }}">HOME</a>
                     </div>
                 </div>
