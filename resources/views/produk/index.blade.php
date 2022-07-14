@@ -13,9 +13,20 @@
                 <div class="content">
 
                     <div class="module">
+                        @if (session()->has('error'))
+                            <div class="alert alert-error">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                {{ session('error') }}
+                            </div>
+                        @elseif(session()->has('success'))
+                            <div class="alert alert-success">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                {{ session('success') }}
+                            </div>
+                        @endif
                         <div class="module-head">
-                            <h3>Produk ({{ $totalProduk }})</h3>
-                            <a class="btn btn-primary" href="{{ route('produk.create') }}">Tambah Produk</a>
+                            <h3>Produk</h3>
+                            <a class="btn btn-primary" href="{{ route('produk.create') }}" style="margin-top:10px">Tambah Produk</a>
                         </div>
                         <div class="module-body table">
                             <table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display" width="100%">
@@ -30,11 +41,11 @@
                                 <tbody>
                                     @foreach ($data as $item)
                                         <tr class="odd gradeX">
-                                            <td>{{ $item->nama }}</td>
+                                            <td><a href="/produk/{{ $item->id }}">{{ $item->nama }}</a></td>
                                             <td>{{ $item->harga }}</td>
                                             <td>{{ $item->pemilik }}</td>
                                             <td>
-                                                <a class="badge" href="#"><i class="icon-edit"></i></a>
+                                                <a class="badge" href="/produk/{{ $item->id }}/edit"><i class="icon-edit"></i></a>
                                                 <form action="/produk/{{ $item->id }}" method="POST" style="display: inline-block">
                                                     @method('delete')
                                                     @csrf

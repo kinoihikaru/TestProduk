@@ -22,11 +22,10 @@ class ProdukController extends Controller
         ->select('produks.*', 'users.name as pemilik')
         ->newQuery();
 
-        $totalProduk = $produk->count();
         $data = $produk->get();
         $totalHarga = $produk->select(DB::raw('sum(produks.harga) as total'))->first();
 
-        return view('produk.index', compact('data', 'totalHarga', 'totalProduk'));
+        return view('produk.index', compact('data', 'totalHarga'));
     }
 
     /**
@@ -49,7 +48,15 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'nama' => 'required|min:5',
+            'harga' => 'required|integer',
+            'user_id' => 'required'
+        ]);
+
+        Produk::create($validateData);
+
+        return redirect()->route('produk.index')->with('success', 'Produk berhasil ditambahkan');
     }
 
     /**
@@ -60,7 +67,7 @@ class ProdukController extends Controller
      */
     public function show($id)
     {
-        $data = Produk::findorFail($id);
+        $data = Produk::with('user')->where('id', $id)->first();
 
         return view('produk.show', compact('data'));
     }
@@ -75,7 +82,9 @@ class ProdukController extends Controller
     {
         $data = Produk::findorFail($id);
 
-        return view('produk.edit', compact('data'));
+        $user = User::where('role', 'user')->get();
+
+        return view('produk.edit', compact('data', 'user'));
     }
 
     /**
@@ -87,7 +96,18 @@ class ProdukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $produk = Produk::findorFail($id);
+
+        $validateData = $request->validate([
+            'nama' => 'required|min:5',
+            'harga' => 'required|integer',
+            'user_id' => 'required'
+        ]);
+
+        $produk->update($validateData);
+
+        return redirect()->route('produk.index')->with('success', 'Produk berhasil diubah');
+
     }
 
     /**

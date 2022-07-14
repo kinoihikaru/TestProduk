@@ -17,26 +17,28 @@
                             <h3>User</h3>
                         </div>
                         <div class="module-body">
-                            <p>
-                                <strong>Default</strong>
-                                -
-                                <small>table class="table"</small>
-                            </p>
                             <table class="table">
                               <thead>
                                 <tr>
-                                  <th>#</th>
-                                  <th>First Name</th>
-                                  <th>Last Name</th>
-                                  <th>Username</th>
+                                    <th>Nama</th>
+                                    <th>Harga</th>
+                                    <th>Pemilik Produk</th>
+                                    <th>Action</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{ $data->nama }}</td>
+                                    <td>{{ $data->harga }}</td>
+                                    <td>{{ $data->user->name }}</td>
+                                    <td>
+                                        <a class="badge" href="/produk/{{ $data->id }}/edit"><i class="icon-edit"></i></a>
+                                        <form action="/produk/{{ $data->id }}" method="POST" style="display: inline-block">
+                                            @method('delete')
+                                            @csrf
+                                            <button onclick="return confirm('Apakah anda ingin menghapus?')" class="badge" style="border: 0"><i class="icon-trash"></i></button>
+                                        </form>
+                                    </td>
                                 </tr>
                               </tbody>
                             </table>

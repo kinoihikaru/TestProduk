@@ -14,37 +14,59 @@
 
                     <div class="module">
                         <div class="module-head">
-                            <h3>Forms</h3>
+                            <h3>Tambah Produk</h3>
                         </div>
                         <div class="module-body">
 
 							<form action="{{ route('produk.store') }}" method="POST" class="form-horizontal row-fluid">
                                 @csrf
                                 <div class="control-group">
-                                    <label class="control-label" for="basicinput">Basic Input</label>
+                                    <label class="control-label" for="basicinput">Nama Produk</label>
                                     <div class="controls">
-                                        <input type="text" id="basicinput" placeholder="Type something here..." class="span8">
+                                        <input type="text" id="basicinput" name="nama" class="span8 @error('name') is-invalid @enderror" value="{{ old('nama') }}">
+                                        @error('nama')
+                                            <span class="help-inline" style="color: red">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
 
                                 <div class="control-group">
-                                    <label class="control-label" for="basicinput">Prepended Input</label>
+                                    <label class="control-label" for="basicinput">Harga</label>
                                     <div class="controls">
                                         <div class="input-prepend">
-                                            <span class="add-on">#</span><input class="span8" type="text" placeholder="prepend">
+                                            <span class="add-on">#</span><input name="harga" class="span8 @error('harga') is-invalid @enderror" type="text" value="{{ old('harga') }}">
+                                            @error('harga')
+                                                <span class="help-inline" style="color: red">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="control-group">
-                                    <label class="control-label" for="basicinput">Dropdown</label>
+                                    <label class="control-label" for="basicinput">Pemilik Produk</label>
                                     <div class="controls">
-                                        <select tabindex="1" data-placeholder="Select here.." class="span8">
+                                        <select tabindex="1" class="span8" name="user_id">
                                             <option></option>
-
+                                            @foreach ($user as $item)
+                                                @if (old('user_id') == $item->id)
+                                                    <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                                                @else
+                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                @endif
+                                            @endforeach
                                         </select>
+                                        @error('user_id')
+                                            <span class="help-inline" style="color: red">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
+
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <button type="submit" class="btn">Submit Form</button>
+                                    </div>
+                                </div>
+
                             </form>
 
                         </div>
