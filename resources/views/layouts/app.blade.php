@@ -3,7 +3,7 @@
 <head>
     @include('layouts.partials.meta')
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }} 9</title>
 
    @include('layouts.partials.link')
    @yield('link')

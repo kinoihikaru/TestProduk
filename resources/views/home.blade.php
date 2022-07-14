@@ -11,17 +11,20 @@
 
             <div class="span9">
                 <div class="content">
+                    @if(session()->has('success'))
+                        <div class="alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     <div class="btn-controls">
                         <div class="btn-box-row row-fluid">
-                            <a href="#" class="btn-box big span4"><i class=" icon-random"></i><b>65%</b>
-                                <p class="text-muted">
-                                    Growth</p>
-                            </a><a href="#" class="btn-box big span4"><i class="icon-user"></i><b>15</b>
-                                <p class="text-muted">
-                                    New Users</p>
-                            </a><a href="#" class="btn-box big span4"><i class="icon-money"></i><b>15,152</b>
-                                <p class="text-muted">
-                                    Profit</p>
+                            <a href="{{ route('translate-api.index') }}" class="btn-box big span4"><i class=" icon-bold"></i><b>65%</b>
+                                <p class="text-muted">Total API Google Translate</p>
+                            </a><a href="{{ route('user.index') }}" class="btn-box big span4"><i class="icon-user"></i><b>15</b>
+                                <p class="text-muted">Total User</p>
+                            </a><a href="{{ route('produk.index') }}" class="btn-box big span4"><i class="icon-inbox"></i><b>15,152</b>
+                                <p class="text-muted">Total Produk</p>
                             </a>
                         </div>
                     </div>
