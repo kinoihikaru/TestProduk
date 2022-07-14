@@ -19,11 +19,11 @@
                     @endif
                     <div class="btn-controls">
                         <div class="btn-box-row row-fluid">
-                            <a href="{{ route('translate-api.index') }}" class="btn-box big span4"><i class=" icon-bold"></i><b>65%</b>
+                            <a href="{{ route('translate-api.index') }}" class="btn-box big span4"><i class=" icon-bold"></i><b>{{ $totalApi }}</b>
                                 <p class="text-muted">Total API Google Translate</p>
-                            </a><a href="{{ route('user.index') }}" class="btn-box big span4"><i class="icon-user"></i><b>15</b>
+                            </a><a href="{{ route('user.index') }}" class="btn-box big span4"><i class="icon-user"></i><b>{{ $totalUser }}</b>
                                 <p class="text-muted">Total User</p>
-                            </a><a href="{{ route('produk.index') }}" class="btn-box big span4"><i class="icon-inbox"></i><b>15,152</b>
+                            </a><a href="{{ route('produk.index') }}" class="btn-box big span4"><i class="icon-inbox"></i><b>{{ $totalProduk }}</b>
                                 <p class="text-muted">Total Produk</p>
                             </a>
                         </div>

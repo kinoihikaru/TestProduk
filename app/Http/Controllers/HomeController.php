@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Produk;
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
+
 
 class HomeController extends Controller
 {
@@ -25,7 +27,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $totalApi = Session::get('apiTranslate');
+        $totalApi = count($totalApi);
+        $totalProduk = Produk::count();
+        $totalUser = User::where('role', 'user')->count();
 
-        return view('home');
+        return view('home', compact('totalApi', 'totalProduk', 'totalUser'));
     }
 }
