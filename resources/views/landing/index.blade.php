@@ -59,7 +59,48 @@
                 </div>
             </div>
         </header>
-
+        <section class="page-section" id="contact">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8 col-xl-6 text-center">
+                        <h2 class="mt-0">Let's Get In Touch!</h2>
+                        <hr class="divider" />
+                        <p class="text-muted mb-5">Ready to start your next project with us? Send us a messages and we will get back to you as soon as possible!</p>
+                    </div>
+                </div>
+                <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+                    <div class="col-lg-6">
+                        <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                            <!-- Name input-->
+                            <div class="form mb-3">
+                                <label for="name">Translate</label>
+                                <input class="form-control" id="name" type="text" placeholder="Enter your name..."  />
+                            </div>
+                            <div class="form mb-7">
+                                <label for="target">Full name</label>
+                                <select class="form-select" id="target">
+                                    <option></option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <div class="form mb-3 mt-5">
+                                <input class="form-control" id="name" type="text" placeholder="Enter your name..."  />
+                            </div>
+                            <!-- Submit Button-->
+                            <div class="d-grid"><button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Translate</button></div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-4 text-center mb-5 mb-lg-0">
+                        <i class="bi-phone fs-2 mb-3 text-muted"></i>
+                        <div>+1 (555) 123-4567</div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <footer class="bg-light py-5">
             <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2022 - Company Name</div></div>
         </footer>

@@ -24,6 +24,19 @@ class LandingController extends Controller
 
         Session::put('apiTranslate', $data);
 
-        return view('landing.index');
+        $responseTranslate = Http::asForm()->withHeaders([
+            'Accept-Encoding' => 'application/gzip',
+            'X-RapidAPI-Key' => '5ee6cfb15cmsh70a69dd5449e3f6p16337djsnc7941e2630c7',
+            'X-RapidAPI-Host' => 'google-translate1.p.rapidapi.com'
+        ])
+        ->post('https://google-translate1.p.rapidapi.com/language/translate/v2', [
+            'q' => 'Hello, world!',
+            'target' => 'id',
+            'source' => 'en'
+        ]);
+
+        $translate = $responseTranslate->json();
+
+        return view('landing.index', compact('translate'));
     }
 }
