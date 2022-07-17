@@ -11,24 +11,21 @@ class LandingController extends Controller
 {
     public function index()
     {
-        // $response = Http::withHeaders([
-        //     'Accept-Encoding' => 'application/gzip',
-        //     'X-RapidAPI-Key' => '5ee6cfb15cmsh70a69dd5449e3f6p16337djsnc7941e2630c7',
-        //     'X-RapidAPI-Host' => 'google-translate1.p.rapidapi.com'
-        // ])->get('https://google-translate1.p.rapidapi.com/language/translate/v2/languages', [
-        //     'target' => 'id'
-        // ]);
+        $response = Http::withHeaders([
+            'Accept-Encoding' => 'application/gzip',
+            'X-RapidAPI-Key' => '36a727d096msh8ab0d528e1eea10p1f4999jsne5f412a87f23',
+            'X-RapidAPI-Host' => 'google-translate1.p.rapidapi.com'
+        ])->get('https://google-translate1.p.rapidapi.com/language/translate/v2/languages', [
+            'target' => 'id'
+        ]);
 
-        // $data = $response->json();
-        // $data = $data['data']['languages'];
-
-        // dd($data);
-
-        // Session::put('apiTranslate', $data);
+        $data = $response->json();
+        $data = $data['data']['languages'];
+        Session::put('apiTranslate', $data);
 
         // $responseTranslate = Http::asForm()->withHeaders([
         //     'Accept-Encoding' => 'application/gzip',
-        //     'X-RapidAPI-Key' => '5ee6cfb15cmsh70a69dd5449e3f6p16337djsnc7941e2630c7',
+        //     'X-RapidAPI-Key' => '36a727d096msh8ab0d528e1eea10p1f4999jsne5f412a87f23',
         //     'X-RapidAPI-Host' => 'google-translate1.p.rapidapi.com'
         // ])
         // ->post('https://google-translate1.p.rapidapi.com/language/translate/v2', [
