@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Produk;
 use App\Models\User;
-use Illuminate\Support\Facades\Session;
-
+use App\Models\LanguageTranslateG;
 
 class HomeController extends Controller
 {
@@ -27,7 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $totalApi = Session::get('apiTranslate');
+        $totalApi = LanguageTranslateG::all();
         $totalApi = count($totalApi);
         $totalProduk = Produk::count();
         $totalUser = User::where('role', 'user')->count();

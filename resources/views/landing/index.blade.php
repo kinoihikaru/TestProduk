@@ -60,76 +60,58 @@
             </div>
         </header>
         <!-- Services-->
-        {{-- <section class="page-section" id="services">
+        <section class="page-section" id="services">
             <div class="container px-4 px-lg-5">
-                <h2 class="text-center mt-0">At Your Service</h2>
+                <h2 class="text-center mt-0">Translate Google</h2>
                 <hr class="divider" />
                 <div class="row gx-4 gx-lg-5">
                     <div class="col-md-6 text-center">
                         <div class="mt-5">
-                            <div class="form mb-7">
-                                <label for="target">Full name</label>
-                                <select class="form-select" id="target">
+                            <div class="form">
+                                <label for="source-translate" style="margin-bottom: 30px"></label>
+                                <select class="form-select" id="source-translate">
                                     <option></option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    @foreach ($language as $item)
+                                        @if ($item->name)
+                                            @if ($item->language == 'id')
+                                                <option value="{{ $item->language }}" selected>{{ $item->name }}</option>
+                                            @else
+                                                <option value="{{ $item->language }}">{{ $item->name }}</option>
+                                            @endif
+                                        @endif
+                                    @endforeach
                                 </select>
+                            </div>
+                            <div class="form mt-3">
+                                <textarea class="form-control" id="translate_input" name="translate_input" type="text" placeholder="" style="height: 10rem"></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 text-center">
                         <div class="mt-5">
-                            <div class="mb-2"><i class="bi-laptop fs-1 text-primary"></i></div>
-                            <h3 class="h4 mb-2">Up to Date</h3>
-                            <p class="text-muted mb-0">All dependencies are kept current to keep things fresh.</p>
+                            <div class="form">
+                                <label for="target-translate" style="margin-bottom: 10px">Translate</label>
+                                <select class="form-select" id="target-translate">
+                                    <option></option>
+                                    @foreach ($language as $item)
+                                        @if ($item->name)
+                                            @if ($item->language == 'en')
+                                                <option value="{{ $item->language }}" selected>{{ $item->name }}</option>
+                                            @else
+                                                <option value="{{ $item->language }}">{{ $item->name }}</option>
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form mt-3">
+                                <textarea class="form-control" id="translate_output" name="translate_output" type="text" placeholder="Translate" style="height: 10rem"></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="page-section" id="contact">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-lg-8 col-xl-6 text-center">
-                        <h2 class="mt-0">Let's Get In Touch!</h2>
-                        <hr class="divider" />
-                        <p class="text-muted mb-5">Ready to start your next project with us? Send us a messages and we will get back to you as soon as possible!</p>
-                    </div>
-                </div>
-                <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
-                    <div class="col-lg-6">
-                        <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-                            <!-- Name input-->
-                            <div class="form mb-3">
-                                <label for="name">Translate</label>
-                                <input class="form-control" id="name" type="text" placeholder="Enter your name..."  />
-                            </div>
-                            <div class="form mb-7">
-                                <label for="target">Full name</label>
-                                <select class="form-select" id="target">
-                                    <option></option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </div>
-                            <div class="form mb-3 mt-5">
-                                <input class="form-control" id="name" type="text" placeholder="Enter your name..."  />
-                            </div>
-                            <!-- Submit Button-->
-                            <div class="d-grid"><button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Translate</button></div>
-                        </form>
-                    </div>
-                </div>
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-lg-4 text-center mb-5 mb-lg-0">
-                        <i class="bi-phone fs-2 mb-3 text-muted"></i>
-                        <div>+1 (555) 123-4567</div>
-                    </div>
-                </div>
-            </div>
-        </section> --}}
         <footer class="bg-light py-5">
             <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2022 - Company Name</div></div>
         </footer>
@@ -137,9 +119,42 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- SimpleLightbox plugin JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- Core theme JS-->
-        <script src="{{ asset('js/landing/scripts.js') }}"></script>
+        <script src="{{ asset('js/scripts.js') }}"></script>
         <script>
+            $(document).ready(function(){
+                $(document).on('keyup', '#translate_input', function (e){
+                    var input = $(this).val();
+                    var source = $('#source-translate').val();
+                    var target = $('#target-translate').val();
+
+                    $.ajaxSetup({
+                        headers : {
+                            'X-CSRF-TOKEN' : "{{ csrf_token() }}"
+                        },
+                    });
+                    $.ajax({
+                        url: '/translate',
+                        type: 'POST',
+                        data: {
+                            input : input,
+                            source : source,
+                            target : target,
+                        },
+                        dataType: 'json',
+                        success: function (resp) {
+                            if(resp.status == true)
+                            {
+                                data = resp.data;
+                                data.forEach(value => {
+                                    $('#translate_output').val(value.translatedText);
+                                });
+                            }
+                        }
+                    });
+                });
+            })
 
         </script>
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>

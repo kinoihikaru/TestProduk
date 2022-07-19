@@ -19,6 +19,7 @@ use App\Http\Controllers\Produk\ProdukController;
 */
 
 Route::get('/', [LandingController::class, 'index'])->name('landing');
+Route::post('/translate', [LandingController::class, 'translate']);
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
