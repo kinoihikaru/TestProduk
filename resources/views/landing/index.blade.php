@@ -60,7 +60,7 @@
             </div>
         </header>
         <!-- Services-->
-        <section class="page-section" id="services">
+        {{-- <section class="page-section" id="services">
             <div class="container px-4 px-lg-5">
                 <h2 class="text-center mt-0">At Your Service</h2>
                 <hr class="divider" />
@@ -129,7 +129,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
         <footer class="bg-light py-5">
             <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2022 - Company Name</div></div>
         </footer>
